@@ -33,8 +33,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="font-display text-2xl font-bold">
-            <span className="text-foreground">Joki</span>
-            <span className="gradient-text">Tugas</span>
+            <span className="text-foreground">Dear</span>
+            <span className="gradient-text">Deadline</span>
           </a>
 
           {/* Desktop Navigation */}

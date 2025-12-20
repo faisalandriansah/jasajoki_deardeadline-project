@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="font-display text-2xl font-bold text-white mb-4">
-              Joki<span className="gradient-text">Tugas</span>
+              Dear<span className="gradient-text">Deadline</span>
             </h3>
             <p className="text-white/60 mb-6 leading-relaxed">
               Layanan asistensi akademik profesional untuk siswa dan mahasiswa Indonesia.
@@ -56,7 +56,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <MessageCircle className="w-5 h-5 text-primary" />
-                <span>+62 812-XXXX-XXXX</span>
+                <span>admin 1 +62 812-XXXX-XXXX</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <MessageCircle className="w-5 h-5 text-primary" />
+                <span>admin 2 +62 812-XXXX-XXXX</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary" />
@@ -74,7 +78,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-white/40 text-sm">
-              © 2024 JokiTugas. Layanan asistensi akademik.
+              © 2025 DearDeadline. Layanan asistensi akademik.
             </p>
             <p className="text-white/40 text-sm">
               Dibuat dengan ❤️ untuk pelajar Indonesia
