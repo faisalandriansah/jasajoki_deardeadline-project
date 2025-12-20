@@ -1,4 +1,4 @@
-import { FileText, BookText, Presentation, FlaskConical, NotebookPen, Code } from "lucide-react";
+import { FileText, BookText, Presentation, FlaskConical, NotebookPen, Palette} from "lucide-react";
 
 const services = [
   {
@@ -32,9 +32,9 @@ const services = [
     color: "from-pink-500 to-rose-500"
   },
   {
-    icon: Code,
-    title: "Coding Assignment",
-    description: "Tugas pemrograman berbagai bahasa.",
+    icon: Palette,
+    title: "Desain Kreatif",
+    description: "Poster, Infografis, Feed Instagram, atau desain tugas lainnya.",
     color: "from-indigo-500 to-blue-500"
   }
 ];
