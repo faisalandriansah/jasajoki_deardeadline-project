@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, Star, Zap } from "lucide-react";
+import { Check, Star, Zap, MessageCircle } from "lucide-react";
 
 const pricingPlans = [
   {
@@ -7,155 +7,186 @@ const pricingPlans = [
     subtitle: "SMP / SMA",
     price: "25K",
     period: "mulai dari",
-    description: "Ringkas & cepat untuk tugas sehari-hari",
+    description: "Ringkas & cepat untuk tugas harian.",
     features: [
       "Tugas harian & PR",
       "Pengerjaan 1-3 hari",
       "Revisi 1x gratis",
-      "Format rapi",
+      "Format rapi & standar",
       "Support via chat"
     ],
     popular: false,
-    buttonVariant: "glass" as const
+    waMessage: "Halo, saya mau pesan paket Pelajar (SMP/SMA) untuk tugas..."
   },
   {
     name: "Mahasiswa",
-    subtitle: "Universitas",
+    subtitle: "Universitas / Umum",
     price: "50K",
     period: "mulai dari",
-    description: "Essay, makalah, dan laporan detail",
+    description: "Essay, makalah, jurnal, & laporan.",
     features: [
-      "Makalah & essay",
-      "Laporan praktikum",
+      "Makalah, Essay & Jurnal",
+      "Laporan Praktikum",
       "Pengerjaan 2-5 hari",
       "Revisi 2x gratis",
-      "Plagiarism check",
-      "Priority support"
+      "Cek Plagiasi (Turnitin)",
+      "Prioritas Support"
     ],
-    popular: true,
-    buttonVariant: "hero" as const
+    popular: true, // Ini yang akan jadi Gradient Card
+    waMessage: "Halo, saya mau pesan paket Mahasiswa untuk tugas..."
   },
   {
     name: "Express",
-    subtitle: "2-24 Jam",
+    subtitle: "Deadline < 24 Jam",
     price: "100K",
     period: "mulai dari",
-    description: "Prioritas tertinggi untuk deadline ketat",
+    description: "Jalur VIP untuk deadline mepet.",
     features: [
       "Semua jenis tugas",
-      "Pengerjaan super cepat",
-      "Revisi unlimited",
-      "Tim dedicated",
-      "24/7 support",
-      "Garansi on-time"
+      "Selesai hitungan jam",
+      "Revisi Unlimited",
+      "Tim Khusus Dedicated",
+      "Support 24 Jam Non-stop",
+      "Garansi Tepat Waktu"
     ],
     popular: false,
     badge: "Fastest",
-    buttonVariant: "gradient" as const
+    waMessage: "URGENT! Halo, saya butuh paket Express (Deadline <24 Jam)..."
   }
 ];
 
 const PricingSection = () => {
+  const whatsappNumber = "6285892182185"; 
+
   return (
     <section 
-    id="harga"
-    className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-background" />
-      <div className="absolute top-20 left-10 w-96 h-96 bg-primary/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-[150px]" />
+      id="harga"
+      className="py-16 sm:py-24 relative overflow-hidden bg-slate-50/50"
+    >
+      {/* Background Decor (Matching Hero) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-blue-400/10 rounded-full blur-[80px] sm:blur-[100px]" />
+        <div className="absolute bottom-20 right-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-400/10 rounded-full blur-[80px] sm:blur-[100px]" />
+      </div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Harga
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16 max-w-3xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+            <Zap className="w-3.5 h-3.5 fill-blue-600" />
+            Daftar Harga
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Pilih Paket <span className="gradient-text">Sesuai Kebutuhan</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 tracking-tight">
+            Pilih Paket <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Sesuai Kebutuhan</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Harga transparan tanpa biaya tersembunyi. Kualitas premium, harga terjangkau.
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed px-2">
+            Harga transparan tanpa biaya tersembunyi. Mulai dari tugas ringan hingga skripsi.
           </p>
         </div>
         
-        {/* Pricing cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 max-w-6xl mx-auto items-start">
           {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className={`relative group rounded-3xl p-8 transition-all duration-500 hover:-translate-y-2 ${
+              className={`relative rounded-[2rem] p-6 sm:p-8 transition-all duration-500 flex flex-col h-full ${
                 plan.popular 
-                  ? 'bg-gradient-to-br from-primary to-accent text-white shadow-glow-lg scale-105' 
-                  : 'glass-card hover:shadow-card-hover'
+                  /* Card Populer: Gradient Background */
+                  ? 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white shadow-2xl shadow-blue-900/20 scale-100 md:scale-110 z-10 ring-1 ring-white/20' 
+                  /* Card Biasa: Glass/White Effect */
+                  : 'bg-white/80 backdrop-blur-xl border border-slate-200 shadow-lg hover:shadow-xl hover:-translate-y-2'
               }`}
             >
-              {/* Badge */}
+              {/* Badge Most Popular */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="flex items-center gap-1 px-4 py-1.5 rounded-full bg-white text-primary text-sm font-semibold shadow-lg">
-                    <Star className="w-4 h-4 fill-current" />
-                    Most Popular
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-max">
+                  <div className="flex items-center gap-1.5 px-6 py-2 rounded-full bg-white text-blue-600 text-sm font-bold shadow-xl ring-4 ring-white/20">
+                    <Star className="w-4 h-4 fill-blue-600" />
+                    Paling Laris
                   </div>
                 </div>
               )}
+
+              {/* Badge Express/Urgent */}
               {plan.badge && !plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <div className="flex items-center gap-1 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-sm font-semibold shadow-lg">
-                    <Zap className="w-4 h-4" />
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-max">
+                  <div className="flex items-center gap-1 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold shadow-lg">
+                    <Zap className="w-3.5 h-3.5 fill-white" />
                     {plan.badge}
                   </div>
                 </div>
               )}
               
-              {/* Plan info */}
-              <div className="text-center mb-8">
-                <h3 className={`font-display text-2xl font-bold mb-1 ${plan.popular ? 'text-white' : 'text-foreground'}`}>
+              {/* Konten Card */}
+              <div className="text-center mb-8 pt-2">
+                <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-slate-900'}`}>
                   {plan.name}
                 </h3>
-                <p className={`text-sm mb-4 ${plan.popular ? 'text-white/80' : 'text-muted-foreground'}`}>
+                <p className={`text-sm font-medium mb-6 px-3 py-1 rounded-full inline-block ${
+                  plan.popular ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'
+                }`}>
                   {plan.subtitle}
                 </p>
+                
                 <div className="flex items-end justify-center gap-1 mb-2">
-                  <span className={`text-sm ${plan.popular ? 'text-white/70' : 'text-muted-foreground'}`}>
+                  <span className={`text-sm mb-1.5 ${plan.popular ? 'text-white/80' : 'text-slate-400'}`}>
                     {plan.period}
                   </span>
+                  <div className="flex items-baseline">
+                     <span className={`text-lg font-semibold ${plan.popular ? 'text-white' : 'text-slate-900'}`}>Rp</span>
+                     <span className={`text-4xl sm:text-5xl font-bold tracking-tight ${plan.popular ? 'text-white' : 'text-slate-900'}`}>
+                      {plan.price}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className={`text-sm ${plan.popular ? 'text-white' : 'text-foreground'}`}>Rp</span>
-                  <span className={`font-display text-5xl font-bold ${plan.popular ? 'text-white' : 'gradient-text'}`}>
-                    {plan.price}
-                  </span>
-                </div>
-                <p className={`text-sm mt-3 ${plan.popular ? 'text-white/80' : 'text-muted-foreground'}`}>
+                <p className={`text-sm mt-4 leading-relaxed ${plan.popular ? 'text-white/80' : 'text-slate-500'}`}>
                   {plan.description}
                 </p>
               </div>
               
-              {/* Features */}
-              <ul className="space-y-3 mb-8">
+              {/* Garis Pemisah */}
+              <div className={`h-px w-full mb-8 ${plan.popular ? 'bg-white/20' : 'bg-slate-100'}`} />
+              
+              {/* List Fitur */}
+              <ul className="space-y-4 mb-8 flex-1">
                 {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3">
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                      plan.popular ? 'bg-white/20' : 'bg-primary/10'
+                  <li key={featureIndex} className="flex items-start gap-3">
+                    <div className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      plan.popular ? 'bg-white/20' : 'bg-blue-50'
                     }`}>
-                      <Check className={`w-3 h-3 ${plan.popular ? 'text-white' : 'text-primary'}`} />
+                      <Check className={`w-3 h-3 ${plan.popular ? 'text-white' : 'text-blue-600'}`} />
                     </div>
-                    <span className={`text-sm ${plan.popular ? 'text-white/90' : 'text-foreground/80'}`}>
+                    <span className={`text-[15px] text-left ${plan.popular ? 'text-white/90' : 'text-slate-600'}`}>
                       {feature}
                     </span>
                   </li>
                 ))}
               </ul>
               
-              {/* CTA */}
-              <Button 
-                variant={plan.popular ? "glass-primary" : plan.buttonVariant}
-                size="lg" 
-                className="w-full"
+              {/* Tombol CTA */}
+              <a 
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(plan.waMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full block mt-auto"
               >
-                Pilih Paket
-              </Button>
+                <Button 
+                  className={`w-full h-12 text-base font-semibold rounded-xl transition-all duration-300 ${
+                    plan.popular 
+                      /* Button di Card Popular (White Button) */
+                      ? "bg-white text-blue-600 hover:bg-slate-50 shadow-lg border-0" 
+                      /* Button di Card Biasa (Outline/Glass) */
+                      : `bg-transparent border-2 shadow-sm ${
+                          plan.name === 'Express'
+                            ? 'border-orange-200 text-orange-600 hover:bg-orange-50 hover:border-orange-300'
+                            : 'border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-300'
+                        }`
+                  }`}
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Pilih Paket
+                </Button>
+              </a>
             </div>
           ))}
         </div>

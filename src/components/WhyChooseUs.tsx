@@ -36,44 +36,52 @@ const features = [
 const WhyChooseUs = () => {
   return (
     <section
-     id="layanan"
-     className="py-24 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute -top-40 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px]" />
-      <div className="absolute -bottom-40 left-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px]" />
+      id="layanan"
+      className="py-16 sm:py-20 md:py-24 relative overflow-hidden bg-slate-50/30"
+    >
+      {/* Background elements - Adjusted for visual balance */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute -top-40 right-0 w-60 sm:w-80 h-60 sm:h-80 bg-blue-500/10 rounded-full blur-[80px] sm:blur-[100px]" />
+      <div className="absolute -bottom-40 left-0 w-60 sm:w-80 h-60 sm:h-80 bg-purple-500/10 rounded-full blur-[80px] sm:blur-[100px]" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* Section header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs sm:text-sm font-medium mb-4 shadow-sm">
             Mengapa Kami?
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Keunggulan <span className="gradient-text">Layanan Kami</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            Keunggulan <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Layanan Kami</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed px-2">
             Kami berkomitmen memberikan layanan terbaik untuk membantu kesuksesan akademik Anda.
           </p>
         </div>
         
-        {/* Features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Features grid - Responsive Breakpoints */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group glass-card p-8 rounded-3xl hover:shadow-card-hover hover:-translate-y-2 transition-all duration-500 cursor-default"
+              className="group bg-white/70 backdrop-blur-xl border border-white/50 p-6 sm:p-8 rounded-[2rem] hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-2 transition-all duration-500 cursor-default relative overflow-hidden"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-glow">
-                <feature.icon className="w-7 h-7 text-white" />
+              {/* Hover Gradient Background Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative z-10">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mb-5 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-blue-500/20">
+                  <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors">
+                  {feature.title}
+                </h3>
+                
+                <p className="text-sm sm:text-base text-slate-500 leading-relaxed group-hover:text-slate-600">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
             </div>
           ))}
         </div>

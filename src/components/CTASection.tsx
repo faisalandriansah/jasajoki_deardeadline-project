@@ -1,61 +1,89 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Sparkles } from "lucide-react";
+import { MessageCircle, Sparkles, ArrowRight } from "lucide-react";
 
 const CTASection = () => {
+  // Konfigurasi WhatsApp
+  const whatsappNumber = "6285892182185";
+  const message = encodeURIComponent("Halo, saya mau konsultasi tugas dong...");
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 animated-gradient" />
+    <section className="py-16 sm:py-24 md:py-32 relative overflow-hidden">
+      {/* 1. Main Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600" />
       
-      {/* Overlay pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
+      {/* 2. Overlay Pattern (Vignette & Texture) */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.2)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-black/10" />
       
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-4 h-4 bg-white/20 rounded-full animate-float" />
-        <div className="absolute top-40 right-[15%] w-3 h-3 bg-white/30 rounded-full animate-float-reverse" />
-        <div className="absolute bottom-20 left-[20%] w-2 h-2 bg-white/20 rounded-full animate-float-slow" />
-        <div className="absolute bottom-40 right-[25%] w-5 h-5 bg-white/10 rounded-full animate-float" />
-        <div className="absolute top-1/2 left-[5%] w-3 h-3 bg-white/20 rounded-full animate-float-reverse" />
-        <div className="absolute top-1/3 right-[8%] w-4 h-4 bg-white/15 rounded-full animate-float-slow" />
+      {/* 3. Floating Particles (Static decoration to avoid config dependency) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-[10%] w-3 h-3 bg-white/30 rounded-full blur-[2px]" />
+        <div className="absolute top-40 right-[15%] w-2 h-2 bg-white/40 rounded-full blur-[1px]" />
+        <div className="absolute bottom-20 left-[20%] w-4 h-4 bg-white/20 rounded-full blur-[3px]" />
+        <div className="absolute top-1/2 right-[5%] w-2 h-2 bg-white/30 rounded-full" />
       </div>
       
-      {/* Glow effects */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-[100px]" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/10 rounded-full blur-[100px]" />
+      {/* 4. Glow Effects */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/20 rounded-full blur-[128px] opacity-50" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/30 rounded-full blur-[128px] opacity-50" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
+          
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur border border-white/20 mb-8">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-sm font-medium text-white/90">Online 24/7</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 hover:bg-white/20 transition-colors cursor-default shadow-lg">
+            <Sparkles className="w-4 h-4 text-yellow-300 fill-yellow-300" />
+            <span className="text-sm font-semibold text-white tracking-wide">Online 24/7 • Fast Response</span>
           </div>
           
           {/* Headline */}
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-sm">
             Siap dibantu sekarang?
             <br />
-            <span className="text-white/80">Kami online 24/7!</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-purple-100">
+              Deadline Bukan Masalah!
+            </span>
           </h2>
           
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto">
-            Jangan biarkan deadline menumpuk. Hubungi kami sekarang dan selesaikan tugasmu dengan mudah!
+          <p className="text-base sm:text-lg md:text-xl text-blue-50/90 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Jangan biarkan tugas menumpuk menghambat aktivitasmu. 
+            Hubungi kami sekarang, kirim detail tugas, dan terima hasil yang memuaskan.
           </p>
           
-          {/* CTA Button */}
-          <Button 
-            size="xl" 
-            className="bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
-          >
-            <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            Chat via WhatsApp
-          </Button>
+          {/* CTA Button Wrapper */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button 
+                size="lg" 
+                className="w-full sm:w-auto h-14 px-8 bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group rounded-xl text-lg font-bold"
+              >
+                <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                Chat via WhatsApp
+              </Button>
+            </a>
+            
+            {/* Secondary Button (Optional - e.g. Scroll to services) */}
+            <Button 
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto h-14 px-8 bg-transparent text-white border-white/30 hover:bg-white/10 hover:text-white hover:border-white rounded-xl text-lg font-medium backdrop-blur-sm"
+              onClick={() => document.getElementById('layanan')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Lihat Layanan
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
           
           {/* Trust text */}
-          <p className="text-white/50 text-sm mt-8">
-            Gratis konsultasi • Respons cepat • Tanpa komitmen
+          <p className="text-white/40 text-xs sm:text-sm mt-8 font-medium">
+            Gratis konsultasi • Privasi Terjamin • Tanpa Biaya Tersembunyi
           </p>
         </div>
       </div>

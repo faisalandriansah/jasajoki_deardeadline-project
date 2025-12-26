@@ -6,14 +6,41 @@ import {
   Shield,
   Award,
   Sparkles,
+  BookOpen,      // Icon baru
+  GraduationCap, // Icon baru
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // Tambah useRef
 
 const HeroSection = () => {
   const [books, setBooks] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fade, setFade] = useState(true);
+
+  // --- LOGIC BARU: DROPDOWN ---
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Tutup dropdown jika klik di luar area
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Fungsi Scroll ke Harga
+  const scrollToPricing = () => {
+    const element = document.getElementById("harga");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsDropdownOpen(false);
+    }
+  };
+  // -----------------------------
 
   const words = ["Cepat", "Rapi", "Terjamin", "Profesional", "Terpercaya"];
 
@@ -30,7 +57,7 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    // Generate floating books w  ith 3D properties
+    // Generate floating books with 3D properties
     const generateBooks = () => {
       const colors = [
         "from-blue-500 to-blue-600",
@@ -99,7 +126,7 @@ const HeroSection = () => {
 Kami menyediakan beberapa paket layanan dengan estimasi waktu dan biaya yang disesuaikan dengan kebutuhan serta tingkat kesulitan tugas. Untuk informasi lebih lanjut, mohon sampaikan jenis layanan yang dibutuhkan, deadline, dan detail singkat tugas.
 Terima kasih 🙏`
   );
-   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
     <section
@@ -292,30 +319,90 @@ Terima kasih 🙏`
             </p>
           </div>
 
-          {/* CTA Buttons with perfect proportions */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-11 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-2 sm:px-4 max-w-2xl mx-auto">
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-            <Button
-              className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full sm:w-auto before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95"
-              style={{
-                fontFamily:
-                  '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              }}
-            >
-              <MessageCircle className="w-[18px] sm:w-5 h-[18px] sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
-              Hubungi WhatsApp
-            </Button>
+          {/* CTA Buttons - MODIFIED FOR DROPDOWN ONLY */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-11 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-2 sm:px-4 max-w-2xl mx-auto relative z-50">
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <Button
+                className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95"
+                style={{
+                  fontFamily:
+                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                }}
+              >
+                <MessageCircle className="w-[18px] sm:w-5 h-[18px] sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
+                Hubungi WhatsApp
+              </Button>
             </a>
-            <Button
-              className="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-lg border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 ease-out hover:scale-105 w-full sm:w-auto group active:scale-95"
-              style={{
-                fontFamily:
-                  '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-              }}
-            >
-              Lihat Harga
-              <ChevronDown className="w-[18px] sm:w-5 h-[18px] sm:h-5 ml-2 group-hover:translate-y-1 transition-transform duration-300 ease-out" />
-            </Button>
+
+            {/* --- DROPDOWN LIHAT HARGA --- */}
+            <div className="relative w-full sm:w-auto" ref={dropdownRef}>
+              <Button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-lg border-2 transition-all duration-500 ease-out w-full active:scale-95 group ${
+                  isDropdownOpen ? "border-blue-400" : "border-slate-200 hover:border-blue-300"
+                }`}
+                style={{
+                  fontFamily:
+                    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                }}
+              >
+                Lihat Harga
+                <ChevronDown 
+                  className={`w-[18px] sm:w-5 h-[18px] sm:h-5 ml-2 transition-transform duration-300 ease-out ${
+                    isDropdownOpen ? "rotate-180" : "group-hover:translate-y-1"
+                  }`} 
+                />
+              </Button>
+
+              {/* Dropdown Menu Items */}
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 sm:left-1/2 sm:-translate-x-1/2 mt-3 w-full sm:w-64 bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-2xl p-2 animate-scale-in origin-top z-50 overflow-hidden ring-1 ring-black/5 text-left">
+                  <div className="flex flex-col gap-1">
+                    {/* Item 1: Pelajar */}
+                    <button
+                      onClick={scrollToPricing}
+                      className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-blue-50 transition-colors duration-200 group/item text-left"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center group-hover/item:bg-blue-200 transition-colors">
+                        <BookOpen className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 text-sm">Pelajar</div>
+                        <div className="text-[11px] text-slate-500">Tugas Harian & PR</div>
+                      </div>
+                    </button>
+
+                    {/* Item 2: Mahasiswa */}
+                    <button
+                      onClick={scrollToPricing}
+                      className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-purple-50 transition-colors duration-200 group/item text-left"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center group-hover/item:bg-purple-200 transition-colors">
+                        <GraduationCap className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 text-sm">Mahasiswa</div>
+                        <div className="text-[11px] text-slate-500">Makalah & Jurnal</div>
+                      </div>
+                    </button>
+
+                    {/* Item 3: Express */}
+                    <button
+                      onClick={scrollToPricing}
+                      className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-orange-50 transition-colors duration-200 group/item text-left"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center group-hover/item:bg-orange-200 transition-colors">
+                        <Zap className="w-5 h-5 text-orange-600" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 text-sm">Express</div>
+                        <div className="text-[11px] text-slate-500">Deadline &lt; 24 Jam</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Trust badges with better spacing */}
@@ -544,8 +631,8 @@ Terima kasih 🙏`
         }
 
         .animate-scale-in {
-          animation: scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          opacity: 0;
+          animation: scale-in 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          transform-origin: top;
         }
 
         .animate-scroll {
