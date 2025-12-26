@@ -35,7 +35,9 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section
+     id="layanan"
+     className="py-24 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent" />
       <div className="absolute -top-40 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px]" />

@@ -57,7 +57,9 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section 
+    id="harga"
+    className="py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-background" />
       <div className="absolute top-20 left-10 w-96 h-96 bg-primary/10 rounded-full blur-[150px]" />
