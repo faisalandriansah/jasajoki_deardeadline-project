@@ -41,9 +41,10 @@ const HeroSection = () => {
       ];
 
       const isMobile = window.innerWidth < 768;
-      const bookCount = isMobile ? 6 : 12;
-      const minSize = isMobile ? 20 : 35;
-      const maxSize = isMobile ? 15 : 25;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const bookCount = isMobile ? 6 : isTablet ? 10 : 12;
+      const minSize = isMobile ? 18 : isTablet ? 25 : 30;
+      const maxSize = isMobile ? 12 : isTablet ? 15 : 20;
 
       const bookElements = [];
       for (let i = 0; i < bookCount; i++) {
@@ -86,7 +87,7 @@ const HeroSection = () => {
   return (
     <section 
     id="beranda"
-    className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-20 md:py-0">
+    className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-16 sm:py-20 md:py-24 lg:py-0">
       {/* Enhanced animated background with floating books */}
       <div className="absolute inset-0">
         {/* Replace gradient orbs with floating book shapes */}
@@ -167,20 +168,20 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto text-center">
           {/* Enhanced Badge with icon */}
-          <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-full bg-white/95 backdrop-blur-xl border border-blue-200 shadow-lg mb-6 md:mb-8 animate-fade-up hover:scale-105 transition-all duration-500 ease-out group">
+          <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/95 backdrop-blur-xl border border-blue-200 shadow-lg mb-5 sm:mb-6 md:mb-8 animate-fade-up hover:scale-105 transition-all duration-500 ease-out group">
             <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
             <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-600 group-hover:rotate-180 transition-transform duration-700 ease-in-out" />
-            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Online 24/7 • Siap Membantu
             </span>
           </div>
 
           {/* Main headline with smooth fade animation */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-tight animate-fade-up [animation-delay:100ms] opacity-0">
-            <span className="text-slate-900 block mb-2">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight animate-fade-up [animation-delay:100ms] opacity-0 px-2">
+            <span className="text-slate-900 block mb-1.5 sm:mb-2">
               Joki Tugas Profesional
             </span>
             <span 
@@ -195,7 +196,7 @@ const HeroSection = () => {
           </h1>
 
           {/* Simplified subheadline for mobile */}
-          <div className="text-base md:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto mb-8 md:mb-10 animate-fade-up [animation-delay:200ms] opacity-0 leading-relaxed px-4">
+          <div className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 animate-fade-up [animation-delay:200ms] opacity-0 leading-relaxed px-2 sm:px-4">
             <p className="block md:hidden">
               Asistensi akademik untuk SMP, SMA, hingga Mahasiswa. Pengerjaan
               cepat, kualitas premium, dan privasi aman.
@@ -247,28 +248,28 @@ const HeroSection = () => {
           </div>
 
           {/* CTA Buttons with enhanced effects */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-10 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-4">
-            <Button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full sm:w-auto before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95">
-              <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-8 sm:mb-10 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-2 sm:px-4 max-w-xl mx-auto">
+            <Button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full sm:w-auto before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95">
+              <MessageCircle className="w-4 sm:w-5 h-4 sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
               Hubungi WhatsApp
             </Button>
-            <Button className="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 md:px-8 py-5 md:py-6 text-base md:text-lg rounded-xl shadow-lg border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 ease-out hover:scale-105 w-full sm:w-auto group active:scale-95">
+            <Button className="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg rounded-xl shadow-lg border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 ease-out hover:scale-105 w-full sm:w-auto group active:scale-95">
               Lihat Harga
-              <ChevronDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform duration-300 ease-out" />
+              <ChevronDown className="w-4 sm:w-5 h-4 sm:h-5 ml-2 group-hover:translate-y-1 transition-transform duration-300 ease-out" />
             </Button>
           </div>
 
           {/* Trust badges with stagger animation */}
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 animate-fade-up [animation-delay:400ms] opacity-0 px-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2.5 sm:gap-3 md:gap-4 animate-fade-up [animation-delay:400ms] opacity-0 px-2 sm:px-4 max-w-4xl mx-auto">
             <div
-              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 md:px-6 py-3 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
+              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-3.5 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 rounded-2xl flex items-center gap-2.5 sm:gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.5s" }}
             >
-              <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
-                <Zap className="w-5 md:w-6 h-5 md:h-6 text-white" />
+              <div className="w-9 sm:w-10 md:w-12 h-9 sm:h-10 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
+                <Zap className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-sm md:text-base text-slate-900">
+                <div className="font-bold text-xs sm:text-sm md:text-base text-slate-900">
                   Fast Delivery
                 </div>
                 <div className="text-xs text-slate-500 hidden sm:block">
@@ -277,14 +278,14 @@ const HeroSection = () => {
               </div>
             </div>
             <div
-              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 md:px-6 py-3 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
+              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-3.5 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 rounded-2xl flex items-center gap-2.5 sm:gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.6s" }}
             >
-              <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
-                <Award className="w-5 md:w-6 h-5 md:h-6 text-white" />
+              <div className="w-9 sm:w-10 md:w-12 h-9 sm:h-10 md:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
+                <Award className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-sm md:text-base text-slate-900">
+                <div className="font-bold text-xs sm:text-sm md:text-base text-slate-900">
                   Premium Quality
                 </div>
                 <div className="text-xs text-slate-500 hidden sm:block">
@@ -293,14 +294,14 @@ const HeroSection = () => {
               </div>
             </div>
             <div
-              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 md:px-6 py-3 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
+              className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-3.5 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 rounded-2xl flex items-center gap-2.5 sm:gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.7s" }}
             >
-              <div className="w-10 md:w-12 h-10 md:h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
-                <Shield className="w-5 md:w-6 h-5 md:h-6 text-white" />
+              <div className="w-9 sm:w-10 md:w-12 h-9 sm:h-10 md:h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 ease-out flex-shrink-0">
+                <Shield className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-sm md:text-base text-slate-900">
+                <div className="font-bold text-xs sm:text-sm md:text-base text-slate-900">
                   100% Confidential
                 </div>
                 <div className="text-xs text-slate-500 hidden sm:block">
