@@ -45,25 +45,30 @@ const HeroSection = () => {
       const isTablet = width >= 640 && width < 1024;
       const isDesktop = width >= 1024;
       
-      const bookCount = isMobile ? 8 : isTablet ? 10 : 12;
-      const minSize = isMobile ? 20 : isTablet ? 24 : 28;
-      const maxSize = isMobile ? 12 : isTablet ? 16 : 18;
+      const bookCount = isMobile ? 12 : isTablet ? 14 : 16;
+      const minSize = isMobile ? 24 : isTablet ? 28 : 32;
+      const maxSize = isMobile ? 16 : isTablet ? 20 : 24;
 
       const bookElements = [];
       for (let i = 0; i < bookCount; i++) {
+        const topPosition = isMobile 
+          ? 10 + (Math.random() * 85)  // Spread evenly from top to bottom on mobile
+          : 100 + Math.random() * 20;
+        
         bookElements.push({
           id: i,
           left: 5 + Math.random() * 90,
-          delay: Math.random() * 8,
-          duration: 12 + Math.random() * 8,
+          delay: Math.random() * 6,
+          duration: isMobile ? 8 + Math.random() * 6 : 12 + Math.random() * 8,
           size: minSize + Math.random() * maxSize,
           rotateX: Math.random() * 30 - 15,
           rotateY: Math.random() * 30 - 15,
           color: colors[Math.floor(Math.random() * colors.length)],
           opacity: isMobile
-            ? 0.35 + Math.random() * 0.2
+            ? 0.45 + Math.random() * 0.25
             : 0.4 + Math.random() * 0.25,
-          initialTop: 100 + Math.random() * 20,
+          initialTop: topPosition,
+          zIndex: Math.floor(Math.random() * 3),
         });
       }
       setBooks(bookElements);
@@ -136,17 +141,18 @@ const HeroSection = () => {
         {books.map((book) => (
           <div
             key={book.id}
-            className="absolute"
+            className="absolute will-change-transform"
             style={{
               left: `${book.left}%`,
               top: `${book.initialTop}%`,
               animation: `floatBook ${book.duration}s ease-in-out infinite`,
               animationDelay: `${book.delay}s`,
               opacity: book.opacity,
+              zIndex: book.zIndex,
             }}
           >
             <div
-              className={`relative bg-gradient-to-br ${book.color} rounded-lg shadow-2xl`}
+              className={`relative bg-gradient-to-br ${book.color} rounded-lg shadow-2xl transform-gpu`}
               style={{
                 width: `${book.size}px`,
                 height: `${book.size * 1.3}px`,
@@ -167,6 +173,13 @@ const HeroSection = () => {
                 style={{ right: "5px" }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
+              {/* Extra shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg" 
+                   style={{
+                     animation: `shine ${book.duration * 1.5}s ease-in-out infinite`,
+                     animationDelay: `${book.delay}s`,
+                   }}
+              />
             </div>
           </div>
         ))}
@@ -327,13 +340,16 @@ const HeroSection = () => {
         @keyframes floatBook {
           0%,
           100% {
-            transform: translateY(0) translateX(0);
+            transform: translateY(0) translateX(0) rotateZ(0deg);
           }
-          33% {
-            transform: translateY(-20px) translateX(10px);
+          25% {
+            transform: translateY(-30px) translateX(15px) rotateZ(3deg);
           }
-          66% {
-            transform: translateY(-40px) translateX(-8px);
+          50% {
+            transform: translateY(-50px) translateX(-10px) rotateZ(-2deg);
+          }
+          75% {
+            transform: translateY(-35px) translateX(20px) rotateZ(4deg);
           }
         }
 
@@ -341,11 +357,29 @@ const HeroSection = () => {
           @keyframes floatBook {
             0%,
             100% {
-              transform: translateY(0) translateX(0) scale(1);
+              transform: translateY(0) translateX(0) scale(1) rotateZ(0deg);
+            }
+            25% {
+              transform: translateY(-35px) translateX(12px) scale(1.08) rotateZ(5deg);
             }
             50% {
-              transform: translateY(-25px) translateX(5px) scale(1.05);
+              transform: translateY(-60px) translateX(-8px) scale(1.05) rotateZ(-3deg);
             }
+            75% {
+              transform: translateY(-40px) translateX(15px) scale(1.1) rotateZ(6deg);
+            }
+          }
+        }
+
+        @keyframes shine {
+          0%,
+          100% {
+            opacity: 0.2;
+            transform: translateX(-50%) translateY(-50%) rotate(0deg);
+          }
+          50% {
+            opacity: 0.6;
+            transform: translateX(0%) translateY(0%) rotate(5deg);
           }
         }
 
@@ -484,11 +518,21 @@ const HeroSection = () => {
         @media (max-width: 639px) {
           [style*="animation"] {
             will-change: transform, opacity;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
           }
           
           .absolute {
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             perspective: 1000px;
+            -webkit-perspective: 1000px;
+          }
+          
+          /* Optimize rendering */
+          .transform-gpu {
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
           }
         }
 
