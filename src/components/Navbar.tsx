@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MessageCircle } from "lucide-react";
+import logoImage from "../assets/logo.png";
 
 const navLinks = [
   { label: "Beranda", id: "beranda" },
@@ -109,7 +110,7 @@ Terima kasih 🙏`
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
                 <img
-                  src="/src/assets/logo.png"
+                  src={logoImage}
                   alt="Logo"
                   className="relative w-11 h-11 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-all duration-300"
                 />
@@ -188,7 +189,7 @@ Terima kasih 🙏`
               <div className="flex items-center justify-between p-6 border-b border-slate-200">
                 <div className="flex items-center gap-2.5">
                   <img
-                    src="/src/assets/logo.png"
+                    src={logoImage}
                     alt="Logo"
                     className="w-10 h-10 rounded-xl object-cover shadow-md"
                   />
