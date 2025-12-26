@@ -12,41 +12,22 @@ import { useEffect, useState } from "react";
 const HeroSection = () => {
   const [books, setBooks] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [typewriterText, setTypewriterText] = useState("");
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [fade, setFade] = useState(true);
 
   const words = ["Cepat", "Rapi", "Terjamin", "Profesional", "Terpercaya"];
 
   useEffect(() => {
-    // Typewriter effect with smooth transitions
-    const typeSpeed = isDeleting ? 60 : 120;
-    const pauseTime = isDeleting ? 1200 : 2500;
-    const currentWord = words[currentWordIndex];
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        setFade(true);
+      }, 400);
+    }, 3000);
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (typewriterText.length < currentWord.length) {
-          setTypewriterText(
-            currentWord.substring(0, typewriterText.length + 1)
-          );
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        if (typewriterText.length > 0) {
-          setTypewriterText(
-            typewriterText.substring(0, typewriterText.length - 1)
-          );
-        } else {
-          setIsDeleting(false);
-          setCurrentWordIndex((currentWordIndex + 1) % words.length);
-        }
-      }
-    }, typeSpeed);
-
-    return () => clearTimeout(timer);
-  }, [typewriterText, isDeleting, currentWordIndex]);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Generate floating books with 3D properties
@@ -186,28 +167,6 @@ const HeroSection = () => {
         ))}
       </div>
 
-      {/* Enhanced Particles with different sizes - reduced on mobile */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(window.innerWidth < 768 ? 15 : 30)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute rounded-full ${
-              i % 3 === 0 ? "w-2 h-2" : "w-1 h-1"
-            } bg-blue-400/30`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `twinkle ${
-                3 + Math.random() * 2
-              }s ease-in-out infinite, float ${
-                6 + Math.random() * 4
-              }s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Enhanced Badge with icon */}
@@ -219,16 +178,19 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* Main headline with typewriter effect */}
+          {/* Main headline with smooth fade animation */}
           <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-tight animate-fade-up [animation-delay:100ms] opacity-0">
             <span className="text-slate-900 block mb-2">
               Joki Tugas Profesional
             </span>
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-flex items-center gap-1 md:gap-2 flex-wrap justify-center">
-              <span className="animate-gradient transition-all duration-300 ease-in-out">
-                {typewriterText}
-              </span>
-              <span className="inline-block w-0.5 md:w-1 h-8 sm:h-10 md:h-12 lg:h-14 bg-gradient-to-r from-blue-600 to-purple-600 animate-blink"></span>
+            <span 
+              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-block transition-all duration-500 ease-in-out"
+              style={{
+                opacity: fade ? 1 : 0,
+                transform: fade ? 'translateY(0) scale(1)' : 'translateY(-10px) scale(0.95)'
+              }}
+            >
+              {words[currentWordIndex]}
             </span>
           </h1>
 
@@ -411,18 +373,6 @@ const HeroSection = () => {
           }
         }
 
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 0.15;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.3);
-          }
-        }
-
         @keyframes scroll {
           0% {
             transform: translateY(0);
@@ -481,6 +431,63 @@ const HeroSection = () => {
           }
         }
 
+        @keyframes word-fade {
+          0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+          }
+          10% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          90% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+          }
+        }
+
+        @keyframes fade-slide {
+          0% {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          15% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          85% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes smooth-fade {
+          0% {
+            opacity: 0;
+            transform: translateY(15px) scale(0.98);
+          }
+          20% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          80% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.98);
+          }
+        }
+
         .animate-fade-up {
           animation: fade-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
@@ -501,6 +508,18 @@ const HeroSection = () => {
 
         .animate-blink {
           animation: blink 1s step-end infinite;
+        }
+
+        .animate-word-fade {
+          animation: word-fade 3s ease-in-out;
+        }
+
+        .animate-fade-slide {
+          animation: fade-slide 3s ease-in-out;
+        }
+
+        .animate-smooth-fade {
+          animation: smooth-fade 3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .animate-float-slow {
