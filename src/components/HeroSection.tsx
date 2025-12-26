@@ -30,7 +30,7 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    // Generate floating books with 3D properties
+    // Generate floating books w  ith 3D properties
     const generateBooks = () => {
       const colors = [
         "from-blue-500 to-blue-600",
