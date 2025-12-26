@@ -44,17 +44,17 @@ const HeroSection = () => {
       const isMobile = width < 640;
       const isTablet = width >= 640 && width < 1024;
       const isDesktop = width >= 1024;
-      
+
       const bookCount = isMobile ? 12 : isTablet ? 14 : 16;
       const minSize = isMobile ? 24 : isTablet ? 28 : 32;
       const maxSize = isMobile ? 16 : isTablet ? 20 : 24;
 
       const bookElements = [];
       for (let i = 0; i < bookCount; i++) {
-        const topPosition = isMobile 
-          ? 10 + (Math.random() * 85)  // Spread evenly from top to bottom on mobile
+        const topPosition = isMobile
+          ? 10 + Math.random() * 85 // Spread evenly from top to bottom on mobile
           : 100 + Math.random() * 20;
-        
+
         bookElements.push({
           id: i,
           left: 5 + Math.random() * 90,
@@ -92,11 +92,21 @@ const HeroSection = () => {
     };
   }, []);
 
+  // whatsapp configuration
+  const whatsappNumber = "6285892182185";
+  const whatsappMessage = encodeURIComponent(
+    `Halo, terima kasih telah menghubungi DearDeadline 👋
+Kami menyediakan beberapa paket layanan dengan estimasi waktu dan biaya yang disesuaikan dengan kebutuhan serta tingkat kesulitan tugas. Untuk informasi lebih lanjut, mohon sampaikan jenis layanan yang dibutuhkan, deadline, dan detail singkat tugas.
+Terima kasih 🙏`
+  );
+   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
   return (
-    <section 
-    id="beranda"
-    className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-20 sm:py-24 md:py-28 lg:py-32"
-    style={{ touchAction: 'pan-y' }}>
+    <section
+      id="beranda"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-20 sm:py-24 md:py-28 lg:py-32"
+      style={{ touchAction: "pan-y" }}
+    >
       {/* Enhanced animated background with floating books */}
       <div className="absolute inset-0">
         {/* Static decorative books */}
@@ -174,11 +184,14 @@ const HeroSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
               {/* Extra shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg" 
-                   style={{
-                     animation: `shine ${book.duration * 1.5}s ease-in-out infinite`,
-                     animationDelay: `${book.delay}s`,
-                   }}
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg"
+                style={{
+                  animation: `shine ${
+                    book.duration * 1.5
+                  }s ease-in-out infinite`,
+                  animationDelay: `${book.delay}s`,
+                }}
               />
             </div>
           </div>
@@ -197,15 +210,24 @@ const HeroSection = () => {
           </div>
 
           {/* Main headline with professional typography */}
-          <h1 className="text-[32px] sm:text-[40px] md:text-5xl lg:text-6xl xl:text-[68px] font-bold mb-4 sm:mb-5 md:mb-6 leading-[1.1] sm:leading-[1.15] animate-fade-up [animation-delay:100ms] opacity-0 px-2" style={{ fontFamily: '"Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', letterSpacing: '-0.02em' }}>
+          <h1
+            className="text-[32px] sm:text-[40px] md:text-5xl lg:text-6xl xl:text-[68px] font-bold mb-4 sm:mb-5 md:mb-6 leading-[1.1] sm:leading-[1.15] animate-fade-up [animation-delay:100ms] opacity-0 px-2"
+            style={{
+              fontFamily:
+                '"Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              letterSpacing: "-0.02em",
+            }}
+          >
             <span className="text-slate-900 block mb-2 sm:mb-2.5">
               Joki Tugas Profesional
             </span>
-            <span 
+            <span
               className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-block transition-all duration-500 ease-in-out"
               style={{
                 opacity: fade ? 1 : 0,
-                transform: fade ? 'translateY(0) scale(1)' : 'translateY(-10px) scale(0.95)'
+                transform: fade
+                  ? "translateY(0) scale(1)"
+                  : "translateY(-10px) scale(0.95)",
               }}
             >
               {words[currentWordIndex]}
@@ -213,9 +235,16 @@ const HeroSection = () => {
           </h1>
 
           {/* Subheadline with better readability */}
-          <div className="text-[15px] sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto mb-8 sm:mb-9 md:mb-10 animate-fade-up [animation-delay:200ms] opacity-0 leading-relaxed px-2 sm:px-4" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+          <div
+            className="text-[15px] sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto mb-8 sm:mb-9 md:mb-10 animate-fade-up [animation-delay:200ms] opacity-0 leading-relaxed px-2 sm:px-4"
+            style={{
+              fontFamily:
+                '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            }}
+          >
             <p className="block md:hidden font-medium">
-              Asistensi akademik untuk SMP, SMA, hingga Mahasiswa. Pengerjaan cepat, kualitas premium, dan privasi aman.
+              Asistensi akademik untuk SMP, SMA, hingga Mahasiswa. Pengerjaan
+              cepat, kualitas premium, dan privasi aman.
             </p>
             <p className="hidden md:block font-medium">
               <span
@@ -265,11 +294,25 @@ const HeroSection = () => {
 
           {/* CTA Buttons with perfect proportions */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-11 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-2 sm:px-4 max-w-2xl mx-auto">
-            <Button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full sm:w-auto before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+            <Button
+              className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full sm:w-auto before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95"
+              style={{
+                fontFamily:
+                  '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              }}
+            >
               <MessageCircle className="w-[18px] sm:w-5 h-[18px] sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
               Hubungi WhatsApp
             </Button>
-            <Button className="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-lg border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 ease-out hover:scale-105 w-full sm:w-auto group active:scale-95" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+            </a>
+            <Button
+              className="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-lg border-2 border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-500 ease-out hover:scale-105 w-full sm:w-auto group active:scale-95"
+              style={{
+                fontFamily:
+                  '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              }}
+            >
               Lihat Harga
               <ChevronDown className="w-[18px] sm:w-5 h-[18px] sm:h-5 ml-2 group-hover:translate-y-1 transition-transform duration-300 ease-out" />
             </Button>
@@ -285,7 +328,13 @@ const HeroSection = () => {
                 <Zap className="w-5 sm:w-5.5 md:w-6 h-5 sm:h-5.5 md:h-6 text-white" />
               </div>
               <div className="text-left min-w-0">
-                <div className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+                <div
+                  className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap"
+                  style={{
+                    fontFamily:
+                      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  }}
+                >
                   Fast Delivery
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
@@ -301,7 +350,13 @@ const HeroSection = () => {
                 <Award className="w-5 sm:w-5.5 md:w-6 h-5 sm:h-5.5 md:h-6 text-white" />
               </div>
               <div className="text-left min-w-0">
-                <div className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+                <div
+                  className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap"
+                  style={{
+                    fontFamily:
+                      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  }}
+                >
                   Premium Quality
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
@@ -317,7 +372,13 @@ const HeroSection = () => {
                 <Shield className="w-5 sm:w-5.5 md:w-6 h-5 sm:h-5.5 md:h-6 text-white" />
               </div>
               <div className="text-left min-w-0">
-                <div className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap" style={{ fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+                <div
+                  className="font-bold text-[13px] sm:text-sm md:text-base text-slate-900 whitespace-nowrap"
+                  style={{
+                    fontFamily:
+                      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  }}
+                >
                   100% Confidential
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
@@ -360,13 +421,16 @@ const HeroSection = () => {
               transform: translateY(0) translateX(0) scale(1) rotateZ(0deg);
             }
             25% {
-              transform: translateY(-35px) translateX(12px) scale(1.08) rotateZ(5deg);
+              transform: translateY(-35px) translateX(12px) scale(1.08)
+                rotateZ(5deg);
             }
             50% {
-              transform: translateY(-60px) translateX(-8px) scale(1.05) rotateZ(-3deg);
+              transform: translateY(-60px) translateX(-8px) scale(1.05)
+                rotateZ(-3deg);
             }
             75% {
-              transform: translateY(-40px) translateX(15px) scale(1.1) rotateZ(6deg);
+              transform: translateY(-40px) translateX(15px) scale(1.1)
+                rotateZ(6deg);
             }
           }
         }
@@ -521,14 +585,14 @@ const HeroSection = () => {
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
           }
-          
+
           .absolute {
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
             perspective: 1000px;
             -webkit-perspective: 1000px;
           }
-          
+
           /* Optimize rendering */
           .transform-gpu {
             transform: translate3d(0, 0, 0);
