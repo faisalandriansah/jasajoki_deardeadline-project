@@ -45,9 +45,9 @@ const HeroSection = () => {
       const isTablet = width >= 640 && width < 1024;
       const isDesktop = width >= 1024;
       
-      const bookCount = isMobile ? 5 : isTablet ? 8 : 12;
-      const minSize = isMobile ? 16 : isTablet ? 22 : 28;
-      const maxSize = isMobile ? 10 : isTablet ? 14 : 18;
+      const bookCount = isMobile ? 8 : isTablet ? 10 : 12;
+      const minSize = isMobile ? 20 : isTablet ? 24 : 28;
+      const maxSize = isMobile ? 12 : isTablet ? 16 : 18;
 
       const bookElements = [];
       for (let i = 0; i < bookCount; i++) {
@@ -61,7 +61,7 @@ const HeroSection = () => {
           rotateY: Math.random() * 30 - 15,
           color: colors[Math.floor(Math.random() * colors.length)],
           opacity: isMobile
-            ? 0.25 + Math.random() * 0.15
+            ? 0.35 + Math.random() * 0.2
             : 0.4 + Math.random() * 0.25,
           initialTop: 100 + Math.random() * 20,
         });
@@ -90,7 +90,8 @@ const HeroSection = () => {
   return (
     <section 
     id="beranda"
-    className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-20 sm:py-24 md:py-28 lg:py-0">
+    className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 px-4 py-20 sm:py-24 md:py-28 lg:py-32"
+    style={{ touchAction: 'pan-y' }}>
       {/* Enhanced animated background with floating books */}
       <div className="absolute inset-0">
         {/* Static decorative books */}
@@ -171,8 +172,8 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-7xl">
+        <div className="max-w-6xl mx-auto text-center w-full">
           {/* Enhanced Badge with icon */}
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/95 backdrop-blur-xl border border-blue-200 shadow-lg mb-6 sm:mb-7 md:mb-8 animate-fade-up hover:scale-105 transition-all duration-500 ease-out group">
             <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
@@ -336,6 +337,18 @@ const HeroSection = () => {
           }
         }
 
+        @media (max-width: 639px) {
+          @keyframes floatBook {
+            0%,
+            100% {
+              transform: translateY(0) translateX(0) scale(1);
+            }
+            50% {
+              transform: translateY(-25px) translateX(5px) scale(1.05);
+            }
+          }
+        }
+
         @keyframes float {
           0%,
           100% {
@@ -460,6 +473,23 @@ const HeroSection = () => {
           -webkit-touch-callout: none;
           -webkit-user-select: none;
           user-select: none;
+        }
+
+        /* Fix for full width layout */
+        body {
+          overflow-x: hidden;
+        }
+
+        /* Better mobile performance */
+        @media (max-width: 639px) {
+          [style*="animation"] {
+            will-change: transform, opacity;
+          }
+          
+          .absolute {
+            backface-visibility: hidden;
+            perspective: 1000px;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
