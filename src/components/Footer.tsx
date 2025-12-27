@@ -75,7 +75,7 @@ const Footer = () => {
 
               {/* Email */}
               <a
-                href="biansastro460@gmail.com"
+                href="mailto:biansastro460@gmail.com"
                 className="w-10 h-10 rounded-md bg-slate-800 text-white flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-600/20"
                 aria-label="Email"
               >
