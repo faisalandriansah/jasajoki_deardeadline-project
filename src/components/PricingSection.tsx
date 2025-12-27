@@ -5,7 +5,7 @@ const pricingPlans = [
   {
     name: "Pelajar",
     subtitle: "SMP / SMA",
-    price: "30K",
+    price: "20K",
     period: "mulai dari",
     description: "Ringkas & cepat untuk tugas harian.",
     features: [
@@ -21,7 +21,7 @@ const pricingPlans = [
   {
     name: "Mahasiswa",
     subtitle: "Universitas / Umum",
-    price: "50K",
+    price: "30K",
     period: "mulai dari",
     description: "Essay, makalah, jurnal, & laporan.",
     features: [
@@ -38,7 +38,7 @@ const pricingPlans = [
   {
     name: "Express",
     subtitle: "Deadline < 24 Jam",
-    price: "100K",
+    price: "70K",
     period: "mulai dari",
     description: "Jalur VIP untuk deadline mepet.",
     features: [
