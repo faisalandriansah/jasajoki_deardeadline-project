@@ -4,7 +4,7 @@ import { MessageCircle, Sparkles, ArrowRight, BookOpen, Laptop, Coffee, CheckCir
 const CTASection = () => {
   // Konfigurasi WhatsApp
   const whatsappNumber = "6285892182185";
-  const message = encodeURIComponent("Halo, saya mau konsultasi tugas dong...");
+  const message = encodeURIComponent("Halo, saya tertarik untuk menggunakan layanan DearDeadline. Bisa bantu saya dengan informasi lebih lanjut?");
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
 
   return (

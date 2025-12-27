@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion"; // Pastikan install framer-motion
 import logoImage from "../assets/logo.png";
 
 const navLinks = [
@@ -14,6 +15,15 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("beranda");
+
+  // WhatsApp Config
+  const whatsappNumber = "6285892182185";
+  const whatsappMessage = encodeURIComponent(
+    `Halo, terima kasih telah menghubungi DearDeadline 👋
+Kami menyediakan beberapa paket layanan dengan estimasi waktu dan biaya yang disesuaikan dengan kebutuhan serta tingkat kesulitan tugas. Untuk informasi lebih lanjut, mohon sampaikan jenis layanan yang dibutuhkan, deadline, dan detail singkat tugas.
+Terima kasih 🙏`
+  );
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const handleNavClick = (id) => {
     setActiveSection(id);
@@ -33,6 +43,11 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    // Intersection Observer untuk update active section saat scroll
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -41,11 +56,7 @@ const Navbar = () => {
           }
         });
       },
-      {
-        root: null,
-        rootMargin: "-100px 0px -50% 0px",
-        threshold: 0.2,
-      }
+      { rootMargin: "-100px 0px -50% 0px", threshold: 0.2 }
     );
 
     navLinks.forEach((link) => {
@@ -53,200 +64,173 @@ const Navbar = () => {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 20;
-      setIsScrolled(scrolled);
-
-      if (window.scrollY <= 100) {
-        setActiveSection("beranda");
-      }
-    };
-
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
     return () => {
-      document.body.style.overflow = "unset";
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
-  }, [isMobileMenuOpen]);
-
-  // WhatsApp Configuration
-  const whatsappNumber = "6285892182185";
-  const whatsappMessage = encodeURIComponent(
-    `Halo, terima kasih telah menghubungi DearDeadline 👋
-Kami menyediakan beberapa paket layanan dengan estimasi waktu dan biaya yang disesuaikan dengan kebutuhan serta tingkat kesulitan tugas. Untuk informasi lebih lanjut, mohon sampaikan jenis layanan yang dibutuhkan, deadline, dan detail singkat tugas.
-Terima kasih 🙏`
-  );
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  }, []);
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-slate-200/50"
-            : "bg-white/90 backdrop-blur-md shadow-sm"
+            ? "bg-white/80 backdrop-blur-md border-slate-200/60 py-3"
+            : "bg-transparent border-transparent py-5"
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex items-center justify-between h-16 lg:h-[72px]">
-            {/* LOGO */}
+          <div className="flex items-center justify-between">
+            {/* LOGO AREA */}
             <button
               onClick={() => handleNavClick("beranda")}
-              className="flex items-center gap-3 group transition-all duration-300 hover:scale-[1.02]"
-              aria-label="Kembali ke beranda"
+              className="flex items-center gap-3 group relative z-50"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-blue-600 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                 <img
                   src={logoImage}
-                  alt="Logo"
-                  className="relative w-11 h-11 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-all duration-300"
+                  alt="DearDeadline Logo"
+                  className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-cover shadow-sm ring-1 ring-slate-900/5"
                 />
               </div>
-              <div className="text-[22px] font-bold tracking-tight">
-                <span className="text-slate-900 group-hover:text-slate-800 transition-colors">
-                  Dear
+              <div className="flex flex-col items-start">
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 leading-none">
+                  Dear<span className="text-blue-600">Deadline</span>
                 </span>
-                <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                  Deadline
+                <span className="text-[10px] sm:text-xs font-medium text-slate-500 tracking-wide">
+                  Partner Tugasmu
                 </span>
               </div>
             </button>
 
             {/* DESKTOP MENU */}
-            <div className="hidden lg:flex items-center gap-1.5">
+            <div className="hidden lg:flex items-center bg-slate-100/50 p-1.5 rounded-full border border-slate-200/60 backdrop-blur-sm">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className={`relative px-5 py-2.5 rounded-xl text-[15px] font-medium transition-all duration-300 ${
+                  className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
                     activeSection === link.id
-                      ? "text-blue-600 bg-blue-50/50"
-                      : "text-slate-700 hover:text-blue-600 hover:bg-slate-50/80"
+                      ? "text-blue-600"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <span className="relative z-10">{link.label}</span>
                   {activeSection === link.id && (
-                    <>
-                      <span className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl opacity-80" />
-                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full shadow-sm" />
-                    </>
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-white rounded-full shadow-sm ring-1 ring-slate-200"
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    />
                   )}
+                  <span className="relative z-10">{link.label}</span>
                 </button>
               ))}
             </div>
 
-            {/* CTA DESKTOP */}
-            <div className="hidden lg:block">
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                <Button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 hover:from-blue-700 hover:via-blue-600 hover:to-purple-700 text-white rounded-xl px-7 py-2.5 shadow-lg hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 font-semibold text-[15px] group">
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                  <MessageCircle className="w-4 h-4 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
-                  <span className="relative z-10">Hubungi Kami</span>
+            {/* RIGHT ACTION */}
+            <div className="hidden lg:flex items-center gap-4">
+              <motion.a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button className="bg-slate-900 hover:bg-blue-600 text-white rounded-full px-6 py-5 shadow-lg shadow-slate-900/20 hover:shadow-blue-600/20 transition-all duration-300 group">
+                  <span className="mr-2">Hubungi Kami</span>
+                  <MessageCircle className="w-4 h-4 group-hover:hidden transition-all" />
+                  <ArrowRight className="w-4 h-4 hidden group-hover:block transition-all" />
                 </Button>
-              </a>
+              </motion.a>
             </div>
 
-            {/* MOBILE MENU TOGGLE */}
+            {/* MOBILE TOGGLE */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
+              className="lg:hidden relative z-50 p-2 rounded-full hover:bg-slate-100 transition-colors"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-slate-700" />
+                <X className="w-6 h-6 text-slate-800" />
               ) : (
-                <Menu className="w-6 h-6 text-slate-700" />
+                <Menu className="w-6 h-6 text-slate-800" />
               )}
             </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* MOBILE MENU OVERLAY */}
-      {isMobileMenuOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden transition-opacity"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-
-          <div className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white z-50 lg:hidden shadow-2xl animate-in slide-in-from-right">
-            <div className="flex flex-col h-full">
-              {/* MOBILE HEADER */}
-              <div className="flex items-center justify-between p-6 border-b border-slate-200">
-                <div className="flex items-center gap-2.5">
-                  <img
-                    src={logoImage}
-                    alt="Logo"
-                    className="w-10 h-10 rounded-xl object-cover shadow-md"
-                  />
-                  <div className="text-xl font-bold">
-                    <span className="text-slate-900">Dear</span>
-                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                      Deadline
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
-                >
-                  <X className="w-6 h-6 text-slate-700" />
-                </button>
-              </div>
-
-              {/* MOBILE NAV LINKS */}
-              <div className="flex-1 overflow-y-auto p-6">
-                <div className="space-y-2">
-                  {navLinks.map((link) => (
-                    <button
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 lg:hidden"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-xs bg-white z-50 lg:hidden shadow-2xl border-l border-slate-100"
+            >
+              <div className="flex flex-col h-full pt-24 px-6 pb-6">
+                <div className="flex flex-col space-y-2">
+                  {navLinks.map((link, i) => (
+                    <motion.button
                       key={link.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
                       onClick={() => handleNavClick(link.id)}
-                      className={`flex items-center w-full text-left px-4 py-3.5 rounded-xl font-medium transition-all ${
+                      className={`text-left text-lg font-medium py-3 border-b border-slate-50 transition-colors ${
                         activeSection === link.id
-                          ? "bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 shadow-sm"
-                          : "text-slate-700 hover:bg-slate-50"
+                          ? "text-blue-600"
+                          : "text-slate-600"
                       }`}
                     >
                       {link.label}
-                      {activeSection === link.id && (
-                        <span className="ml-auto w-2 h-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600" />
-                      )}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
-              </div>
 
-              {/* MOBILE CTA */}
-              <div className="p-6 border-t border-slate-200">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl px-6 py-3.5 shadow-lg hover:shadow-xl transition-all font-medium">
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Hubungi Kami
-                  </Button>
-                </a>
+                <div className="mt-auto">
+                  <motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-6 text-base shadow-lg shadow-blue-600/25">
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      Chat WhatsApp
+                    </Button>
+                  </motion.a>
+
+                  <p className="text-center text-xs text-slate-400 mt-6">
+                    © 2024 DearDeadline. All rights reserved.
+                  </p>
+                </div>
               </div>
-            </div>
-          </div>
-        </>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

@@ -5,7 +5,7 @@ const pricingPlans = [
   {
     name: "Pelajar",
     subtitle: "SMP / SMA",
-    price: "25K",
+    price: "30K",
     period: "mulai dari",
     description: "Ringkas & cepat untuk tugas harian.",
     features: [
@@ -16,7 +16,7 @@ const pricingPlans = [
       "Support via chat"
     ],
     popular: false,
-    waMessage: "Halo, saya mau pesan paket Pelajar (SMP/SMA) untuk tugas..."
+    waMessage: "Halo kak, saya ingin memesan Paket Pelajar (SMP/SMA). Apakah bisa dibantu untuk pengerjaan tugas saya?"
   },
   {
     name: "Mahasiswa",
@@ -33,7 +33,7 @@ const pricingPlans = [
       "Prioritas Support"
     ],
     popular: true, // Ini yang akan jadi Gradient Card
-    waMessage: "Halo, saya mau pesan paket Mahasiswa untuk tugas..."
+    waMessage: "Halo, saya mau pesan paket Mahasiswa. Bisa bantu untuk pengerjaan tugas saya?"
   },
   {
     name: "Express",
@@ -51,7 +51,7 @@ const pricingPlans = [
     ],
     popular: false,
     badge: "Fastest",
-    waMessage: "URGENT! Halo, saya butuh paket Express (Deadline <24 Jam)..."
+    waMessage: "URGENT! Halo, saya butuh paket Express (Deadline <24 Jam). Mohon bantuannya segera ya."
   }
 ];
 

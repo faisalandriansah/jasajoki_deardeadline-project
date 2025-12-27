@@ -3,39 +3,39 @@ import { Star, ChevronLeft, ChevronRight, Quote, MessageSquareQuote } from "luci
 
 const testimonials = [
   {
-    name: "Andi Pratama",
-    role: "Mahasiswa Teknik",
-    avatar: "AP",
+    name: "Achmad Faisal Andriansah",
+    role: "Mahasiswa ",
+    avatar: "FA",
     rating: 5,
     comment: "Luar biasa! Laporan praktikum saya dikerjakan dengan sangat detail dan tepat waktu. Sangat recommended!"
   },
   {
-    name: "Sarah Wijaya",
-    role: "Siswa SMA",
-    avatar: "SW",
+    name: "Fiko Febrianto",
+    role: "Mahasiswa",
+    avatar: "FF",
     rating: 5,
     comment: "Tugas matematika yang tadinya bikin pusing, sekarang jadi mudah dipahami. Penjelasannya juga lengkap!"
   },
   {
-    name: "Budi Santoso",
-    role: "Mahasiswa Ekonomi",
+    name: "Bunga Sari",
+    role: "Siswi SMA",
     avatar: "BS",
     rating: 5,
-    comment: "Makalah saya dapat nilai A! Kualitasnya benar-benar premium dan plagiarism free."
+    comment: "tugas essay saya selesai dengan hasil yang memuaskan. Terima kasih DearDeadline!"
   },
   {
-    name: "Dewi Lestari",
-    role: "Siswa SMP",
-    avatar: "DL",
+    name: "Aina Nurul",
+    role: "Siswi SMP",
+    avatar: "AN",
     rating: 5,
-    comment: "PR bahasa Inggris jadi gampang! Responnya cepat dan hasilnya bagus banget."
+    comment: "PR bahasa Inggris jadi gampang dikerjakan. Penulisannya rapi dan sesuai dengan kaidah yang benar."
   },
   {
-    name: "Rizky Fadillah",
-    role: "Mahasiswa IT",
-    avatar: "RF",
+    name: "Lionel Suhud",
+    role: "Siswa SMK",
+    avatar: "LS",
     rating: 5,
-    comment: "Coding assignment selesai dalam 24 jam. Clean code dan well documented. Top!"
+    comment: "Tugas presentasi saya dibuat dengan desain yang menarik dan informatif. Sangat membantu!"
   }
 ];
 
