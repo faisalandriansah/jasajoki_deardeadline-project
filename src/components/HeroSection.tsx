@@ -6,10 +6,10 @@ import {
   Shield,
   Award,
   Sparkles,
-  BookOpen,      // Icon baru
-  GraduationCap, // Icon baru
+  BookOpen,
+  GraduationCap,
 } from "lucide-react";
-import { useEffect, useState, useRef } from "react"; // Tambah useRef
+import { useEffect, useState, useRef } from "react";
 
 const HeroSection = () => {
   const [books, setBooks] = useState([]);
@@ -17,7 +17,7 @@ const HeroSection = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
-  // --- LOGIC BARU: DROPDOWN ---
+  // --- LOGIC DROPDOWN ---
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -42,7 +42,14 @@ const HeroSection = () => {
   };
   // -----------------------------
 
-  const words = ["Cepat", "Rapi", "Terjamin", "Profesional", "Terpercaya"];
+  // KATA-KATA BARU: Lebih persuasif & menjual benefit
+  const words = [
+    "Tanpa Pusing",
+    "Bebas Plagiasi",
+    "Tepat Waktu",
+    "Privasi Aman",
+    "Harga Pelajar",
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,6 +77,7 @@ const HeroSection = () => {
       const width = window.innerWidth;
       const isMobile = width < 640;
       const isTablet = width >= 640 && width < 1024;
+      // eslint-disable-next-line no-unused-vars
       const isDesktop = width >= 1024;
 
       const bookCount = isMobile ? 12 : isTablet ? 14 : 16;
@@ -122,9 +130,7 @@ const HeroSection = () => {
   // whatsapp configuration
   const whatsappNumber = "6285892182185";
   const whatsappMessage = encodeURIComponent(
-    `Halo, terima kasih telah menghubungi DearDeadline 👋
-Kami menyediakan beberapa paket layanan dengan estimasi waktu dan biaya yang disesuaikan dengan kebutuhan serta tingkat kesulitan tugas. Untuk informasi lebih lanjut, mohon sampaikan jenis layanan yang dibutuhkan, deadline, dan detail singkat tugas.
-Terima kasih 🙏`
+    `Halo, saya tertarik dengan jasa tugas DearDeadline 👋\nBisa minta info lebih lanjut mengenai harga dan pengerjaannya?`
   );
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -136,7 +142,7 @@ Terima kasih 🙏`
     >
       {/* Enhanced animated background with floating books */}
       <div className="absolute inset-0">
-        {/* Static decorative books */}
+        {/* Static decorative books (Background Items) */}
         <div className="absolute top-20 left-10 w-12 sm:w-14 md:w-16 h-16 sm:h-18 md:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-2xl animate-float-slow opacity-20 transform rotate-12 hidden md:block">
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-black/30 rounded-l-lg" />
           <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
@@ -149,19 +155,6 @@ Terima kasih 🙏`
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-black/30 rounded-l-lg" />
           <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
         </div>
-        <div className="absolute bottom-40 right-1/3 w-9 sm:w-10 h-12 sm:h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg shadow-2xl animate-float-reverse opacity-20 transform -rotate-12 hidden lg:block">
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-black/30 rounded-l-lg" />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
-        </div>
-        <div className="absolute top-1/3 right-10 w-11 sm:w-13 md:w-14 h-14 sm:h-17 md:h-18 bg-gradient-to-br from-violet-500 to-violet-600 rounded-lg shadow-2xl animate-float-slow opacity-20 transform rotate-6 hidden md:block">
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-black/30 rounded-l-lg" />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
-        </div>
-        <div className="absolute top-1/2 left-20 w-9 sm:w-10 md:w-11 h-12 sm:h-13 md:h-15 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg shadow-2xl animate-float-reverse opacity-20 transform -rotate-45 hidden lg:block">
-          <div className="absolute left-0 top-0 bottom-0 w-1 bg-black/30 rounded-l-lg" />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
-        </div>
-
         {/* Subtle light gradient overlay */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] md:w-[700px] h-[350px] sm:h-[500px] md:h-[700px] bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-full blur-3xl animate-pulse" />
       </div>
@@ -205,12 +198,7 @@ Terima kasih 🙏`
                 className="absolute right-0 top-2 bottom-2 w-0.5 bg-white/40"
                 style={{ right: "3px" }}
               />
-              <div
-                className="absolute right-0 top-2 bottom-2 w-0.5 bg-white/30"
-                style={{ right: "5px" }}
-              />
               <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent rounded-lg" />
-              {/* Extra shine effect */}
               <div
                 className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg"
                 style={{
@@ -225,18 +213,19 @@ Terima kasih 🙏`
         ))}
       </div>
 
+      {/* MAIN CONTENT */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-7xl">
         <div className="max-w-6xl mx-auto text-center w-full">
-          {/* Enhanced Badge with icon */}
+          {/* BADGE: Updated Text */}
           <div className="inline-flex items-center gap-2 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/95 backdrop-blur-xl border border-blue-200 shadow-lg mb-6 sm:mb-7 md:mb-8 animate-fade-up hover:scale-105 transition-all duration-500 ease-out group">
             <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 group-hover:rotate-180 transition-transform duration-700 ease-in-out" />
             <span className="text-[11px] sm:text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Online 24/7 • Siap Membantu
+              Solusi Deadline Mepet • Online 24 Jam
             </span>
           </div>
 
-          {/* Main headline with professional typography */}
+          {/* HEADLINE: Updated Text */}
           <h1
             className="text-[32px] sm:text-[40px] md:text-5xl lg:text-6xl xl:text-[68px] font-bold mb-4 sm:mb-5 md:mb-6 leading-[1.1] sm:leading-[1.15] animate-fade-up [animation-delay:100ms] opacity-0 px-2"
             style={{
@@ -246,10 +235,10 @@ Terima kasih 🙏`
             }}
           >
             <span className="text-slate-900 block mb-2 sm:mb-2.5">
-              Joki Tugas Profesional
+              Jasa Tugas Akademik
             </span>
             <span
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-block transition-all duration-500 ease-in-out"
+              className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent inline-block transition-all duration-500 ease-in-out pb-2"
               style={{
                 opacity: fade ? 1 : 0,
                 transform: fade
@@ -261,7 +250,7 @@ Terima kasih 🙏`
             </span>
           </h1>
 
-          {/* Subheadline with better readability */}
+          {/* SUBHEADLINE: Updated Text (Lebih Nyambung & Flowy) */}
           <div
             className="text-[15px] sm:text-base md:text-lg lg:text-xl text-slate-600 max-w-3xl mx-auto mb-8 sm:mb-9 md:mb-10 animate-fade-up [animation-delay:200ms] opacity-0 leading-relaxed px-2 sm:px-4"
             style={{
@@ -269,59 +258,27 @@ Terima kasih 🙏`
                 '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
             }}
           >
-            <p className="block md:hidden font-medium">
-              Asistensi akademik untuk SMP, SMA, hingga Mahasiswa. Pengerjaan
-              cepat, kualitas premium, dan privasi aman.
-            </p>
-            <p className="hidden md:block font-medium">
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.3s" }}
-              >
-                Asistensi
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.4s" }}
-              >
-                akademik
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.5s" }}
-              >
-                untuk
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.6s" }}
-              >
-                SMP,
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.7s" }}
-              >
-                SMA,
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.8s" }}
-              >
-                hingga
-              </span>{" "}
-              <span
-                className="inline-block animate-fade-in-word"
-                style={{ animationDelay: "0.9s" }}
-              >
-                Mahasiswa.
+            <p className="font-medium text-slate-600">
+              Solusi jitu tugas{" "}
+              <span className="text-blue-600 font-semibold">Sekolah</span>{" "}
+              hingga{" "}
+              <span className="text-purple-600 font-semibold">Kuliah</span>.
+              Pengerjaan cepat, hasil orisinal, dan{" "}
+              <span className="text-slate-900 font-semibold">
+                privasi terjamin
               </span>
+              . Kamu tinggal terima beres!
             </p>
           </div>
 
-          {/* CTA Buttons - MODIFIED FOR DROPDOWN ONLY */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-11 md:mb-12 animate-fade-up [animation-delay:300ms] opacity-0 px-2 sm:px-4 max-w-2xl mx-auto relative z-50">
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
               <Button
                 className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-[length:200%_100%] text-white px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:-translate-y-1 group w-full before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-1000 before:ease-in-out active:scale-95"
                 style={{
@@ -330,7 +287,7 @@ Terima kasih 🙏`
                 }}
               >
                 <MessageCircle className="w-[18px] sm:w-5 h-[18px] sm:h-5 mr-2 group-hover:scale-110 transition-transform duration-300 ease-out" />
-                Hubungi WhatsApp
+                Tanya Admin / Konsultasi
               </Button>
             </a>
 
@@ -339,7 +296,9 @@ Terima kasih 🙏`
               <Button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`bg-white/90 backdrop-blur-sm hover:bg-white text-slate-900 px-6 sm:px-7 md:px-8 lg:px-10 py-3.5 sm:py-4 md:py-5 text-[15px] sm:text-base md:text-lg font-semibold rounded-xl shadow-lg border-2 transition-all duration-500 ease-out w-full active:scale-95 group ${
-                  isDropdownOpen ? "border-blue-400" : "border-slate-200 hover:border-blue-300"
+                  isDropdownOpen
+                    ? "border-blue-400"
+                    : "border-slate-200 hover:border-blue-300"
                 }`}
                 style={{
                   fontFamily:
@@ -347,14 +306,14 @@ Terima kasih 🙏`
                 }}
               >
                 Lihat Harga
-                <ChevronDown 
+                <ChevronDown
                   className={`w-[18px] sm:w-5 h-[18px] sm:h-5 ml-2 transition-transform duration-300 ease-out ${
                     isDropdownOpen ? "rotate-180" : "group-hover:translate-y-1"
-                  }`} 
+                  }`}
                 />
               </Button>
 
-              {/* Dropdown Menu Items */}
+              {/* Dropdown Menu Items (Teks original, tidak diubah) */}
               {isDropdownOpen && (
                 <div className="absolute top-full left-0 sm:left-1/2 sm:-translate-x-1/2 mt-3 w-full sm:w-64 bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-2xl p-2 animate-scale-in origin-top z-50 overflow-hidden ring-1 ring-black/5 text-left">
                   <div className="flex flex-col gap-1">
@@ -367,8 +326,12 @@ Terima kasih 🙏`
                         <BookOpen className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-900 text-sm">Pelajar</div>
-                        <div className="text-[11px] text-slate-500">Tugas Harian & PR</div>
+                        <div className="font-semibold text-slate-900 text-sm">
+                          Pelajar
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Tugas Harian & PR
+                        </div>
                       </div>
                     </button>
 
@@ -381,8 +344,12 @@ Terima kasih 🙏`
                         <GraduationCap className="w-5 h-5 text-purple-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-900 text-sm">Mahasiswa</div>
-                        <div className="text-[11px] text-slate-500">Makalah & Jurnal</div>
+                        <div className="font-semibold text-slate-900 text-sm">
+                          Mahasiswa
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Makalah & Jurnal
+                        </div>
                       </div>
                     </button>
 
@@ -395,8 +362,12 @@ Terima kasih 🙏`
                         <Zap className="w-5 h-5 text-orange-600" />
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-900 text-sm">Express</div>
-                        <div className="text-[11px] text-slate-500">Deadline &lt; 24 Jam</div>
+                        <div className="font-semibold text-slate-900 text-sm">
+                          Express
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Deadline &lt; 24 Jam
+                        </div>
                       </div>
                     </button>
                   </div>
@@ -405,8 +376,9 @@ Terima kasih 🙏`
             </div>
           </div>
 
-          {/* Trust badges with better spacing */}
+          {/* TRUST BADGES: Updated Text to Indonesian */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 animate-fade-up [animation-delay:400ms] opacity-0 px-2 sm:px-4 max-w-5xl mx-auto">
+            {/* Badge 1 */}
             <div
               className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.5s" }}
@@ -422,13 +394,15 @@ Terima kasih 🙏`
                       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   }}
                 >
-                  Fast Delivery
+                  Pengerjaan Kilat
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
-                  Tepat waktu
+                  Siap bantu deadline hitungan jam
                 </div>
               </div>
             </div>
+
+            {/* Badge 2 */}
             <div
               className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.6s" }}
@@ -444,13 +418,15 @@ Terima kasih 🙏`
                       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   }}
                 >
-                  Premium Quality
+                  Kualitas Akademik
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
-                  Berkualitas tinggi
+                  Sesuai standar guru & dosen
                 </div>
               </div>
             </div>
+
+            {/* Badge 3 */}
             <div
               className="group bg-white/90 backdrop-blur-sm border border-slate-200 px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-2xl flex items-center gap-3 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out animate-scale-in active:scale-95"
               style={{ animationDelay: "0.7s" }}
@@ -466,10 +442,10 @@ Terima kasih 🙏`
                       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   }}
                 >
-                  100% Confidential
+                  Rahasia Terjamin
                 </div>
                 <div className="text-[11px] sm:text-xs text-slate-500 hidden sm:block whitespace-nowrap">
-                  Privasi terjamin
+                  Identitas & data aman 100%
                 </div>
               </div>
             </div>
