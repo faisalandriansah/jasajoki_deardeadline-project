@@ -3,14 +3,14 @@ import { Star, ChevronLeft, ChevronRight, Quote, MessageSquareQuote } from "luci
 
 const testimonials = [
   {
-    name: "Achmad Faisal Andriansah",
+    name: "Fiko Febrianto",
     role: "Mahasiswa ",
     avatar: "FA",
     rating: 5,
     comment: "Luar biasa! Laporan praktikum saya dikerjakan dengan sangat detail dan tepat waktu. Sangat recommended!"
   },
   {
-    name: "Fiko Febrianto",
+    name: "Faisal Andriansah",
     role: "Mahasiswa",
     avatar: "FF",
     rating: 5,
