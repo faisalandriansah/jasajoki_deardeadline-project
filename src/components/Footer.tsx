@@ -217,15 +217,29 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-slate-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-            <p className="transition-colors duration-300 hover:text-gray-300">
+       {/* Bottom bar */}
+        <div className="border-t border-slate-800 pt-8 mt-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            {/* Kiri: Copyright (Lebih terang dikit karena info penting) */}
+            <p className="text-sm text-gray-500 text-center md:text-left">
               © 2025 DearDeadline. All rights reserved.
             </p>
-            <p className="transition-colors duration-300 hover:text-gray-300">
-              Layanan asistensi akademik profesional
-            </p>
+
+            {/* Kanan: Nama Lu (Mode Stealth/Tidak Mencolok) */}
+            <a
+              href="https://www.instagram.com/_faisalandrsh" 
+              target="_blank"
+              rel="noopener noreferrer"
+              // RAHASIANYA DISINI BRO:
+              // 1. text-[11px]: Ukuran font sangat kecil.
+              // 2. text-slate-700: Warnanya gelap banget, hampir nyatu sama background.
+              // 3. hover:text-slate-500: Pas disorot baru jadi abu-abu agak terang.
+              className="text-[11px] font-medium text-slate-700 hover:text-slate-500 transition-colors duration-300 cursor-pointer"
+            >
+              Dev by Andriansah20
+            </a>
+
           </div>
         </div>
       </div>
