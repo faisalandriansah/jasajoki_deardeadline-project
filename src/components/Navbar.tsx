@@ -172,19 +172,26 @@ Terima kasih 🙏`
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
+            {/* 1. OVERLAY (Backdrop) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 lg:hidden"
+              // HAPUS 'backdrop-blur-sm', ganti opacity background lebih gelap biar tetep fokus
+              className="fixed inset-0 bg-slate-900/50 z-40 lg:hidden"
             />
+
+            {/* 2. DRAWER MENU */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-xs bg-white z-50 lg:hidden shadow-2xl border-l border-slate-100"
+              // GANTI transition jadi 'tween' biar enteng di HP kentang pun lancar
+              transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+              // TAMBAH 'will-change-transform' biar diproses GPU
+              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-xs bg-white z-50 lg:hidden shadow-2xl border-l border-slate-100 will-change-transform"
             >
               <div className="flex flex-col h-full pt-24 px-6 pb-6">
                 <div className="flex flex-col space-y-2">
@@ -193,7 +200,8 @@ Terima kasih 🙏`
                       key={link.id}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
+                      // Kasih delay dikit tapi durasi cepet
+                      transition={{ delay: 0.1 + i * 0.05, duration: 0.2 }}
                       onClick={() => handleNavClick(link.id)}
                       className={`text-left text-lg font-medium py-3 border-b border-slate-50 transition-colors ${
                         activeSection === link.id
@@ -207,23 +215,24 @@ Terima kasih 🙏`
                 </div>
 
                 <div className="mt-auto">
+                  {/* Hapus animasi kompleks di tombol bawah, cukup fade in aja */}
                   <motion.a
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
                     href={whatsappLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block"
                   >
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-6 text-base shadow-lg shadow-blue-600/25">
+                    <Button className="w-full bg-blue-600 active:bg-blue-700 text-white rounded-xl py-6 text-base shadow-lg shadow-blue-600/25">
                       <MessageCircle className="w-5 h-5 mr-2" />
                       Chat WhatsApp
                     </Button>
                   </motion.a>
 
                   <p className="text-center text-xs text-slate-400 mt-6">
-                    © 2024 DearDeadline. All rights reserved.
+                    © 2025 DearDeadline. All rights reserved.
                   </p>
                 </div>
               </div>
